@@ -1,0 +1,4 @@
+﻿User-agent: *
+Allow: /
+
+Sitemap: https://jonh-ryan-coranes.vercel.app/sitemap.xml
