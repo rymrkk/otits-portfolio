@@ -71,3 +71,30 @@ if (reducedMotion.matches || !("IntersectionObserver" in window)) {
 reducedMotion.addEventListener("change", (event) => {
   if (event.matches) revealAll();
 });
+const certificateDialog = document.querySelector("[data-certificate-dialog]");
+const certificateDialogImage = document.querySelector("[data-certificate-dialog-image]");
+const certificateClose = document.querySelector("[data-certificate-close]");
+const certificateTriggers = Array.from(document.querySelectorAll("[data-certificate-open]"));
+
+const openCertificateDialog = (trigger) => {
+  if (!certificateDialog || !certificateDialogImage || typeof certificateDialog.showModal !== "function") return;
+  certificateDialogImage.src = trigger.dataset.certificateSrc || "";
+  certificateDialogImage.alt = trigger.dataset.certificateAlt || "Certificate preview";
+  certificateDialog.showModal();
+  certificateClose?.focus();
+};
+
+const closeCertificateDialog = () => {
+  if (!certificateDialog?.open) return;
+  certificateDialog.close();
+  certificateDialogImage.src = "";
+};
+
+certificateTriggers.forEach((trigger) => {
+  trigger.addEventListener("click", () => openCertificateDialog(trigger));
+});
+
+certificateClose?.addEventListener("click", closeCertificateDialog);
+certificateDialog?.addEventListener("click", (event) => {
+  if (event.target === certificateDialog) closeCertificateDialog();
+});
