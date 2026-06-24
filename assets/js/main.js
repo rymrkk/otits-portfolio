@@ -98,3 +98,43 @@ certificateClose?.addEventListener("click", closeCertificateDialog);
 certificateDialog?.addEventListener("click", (event) => {
   if (event.target === certificateDialog) closeCertificateDialog();
 });
+const copyEmailButtons = Array.from(document.querySelectorAll("[data-copy-email]"));
+
+const writeClipboardText = async (text) => {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.setAttribute("readonly", "");
+  textArea.style.position = "fixed";
+  textArea.style.top = "-999px";
+  document.body.append(textArea);
+  textArea.select();
+  document.execCommand("copy");
+  textArea.remove();
+};
+
+copyEmailButtons.forEach((button) => {
+  const label = button.querySelector("[data-copy-email-label]");
+  const defaultLabel = label?.textContent || "Copy Email";
+
+  button.addEventListener("click", async () => {
+    const email = button.dataset.copyEmail;
+    if (!email) return;
+
+    try {
+      await writeClipboardText(email);
+      button.classList.add("is-copied");
+      if (label) label.textContent = "Email Copied";
+      window.setTimeout(() => {
+        button.classList.remove("is-copied");
+        if (label) label.textContent = defaultLabel;
+      }, 1800);
+    } catch {
+      if (label) label.textContent = email;
+    }
+  });
+});

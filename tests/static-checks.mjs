@@ -14,7 +14,6 @@ test("static site files exist", () => {
     "assets/css/style.css",
     "assets/js/main.js",
     "assets/resume/jonh-ryan-coranes-resume.pdf",
-    "assets/img/profile.png",
     "assets/img/profile-960.jpg"
   ].forEach((path) => assert.equal(existsSync(path), true, `${path} should exist`));
 });
@@ -28,6 +27,8 @@ test("homepage follows the single Stitch vertical timeline baseline", () => {
   assert.match(html, /Building productive prospect conversations through preparation, clear communication, and consistent follow-through\./);
   assert.match(html, /class="hero-meta-icon"/);
   assert.match(html, /class="hero-meta-text"/);
+  assert.match(html, /hero-icon-button/);
+  assert.match(html, /title="Copy email"/);
   assert.match(html, /View Resume/);
   assert.match(html, /Instagram/);
   assert.match(html, /Facebook/);
@@ -46,7 +47,19 @@ test("homepage follows the single Stitch vertical timeline baseline", () => {
   assert.match(html, /class="capability-card"/);
   assert.match(html, /class="capability-icon"/);
   assert.doesNotMatch(html, /<article class="capability-card"[^>]*><span>0[1-6]<\/span><h3>Prospecting<\/h3>/);
-  assert.match(html, /Expertise &amp; Toolkit/);
+  assert.match(html, /Expertise &amp; Tools/);
+  assert.match(html, /id="expertise-title">Expertise/);
+  assert.match(html, /id="tools-title">Tools/);
+  assert.match(html, /skill-groups/);
+  assert.match(html, /tool-pill/);
+  assert.match(html, /skills-marquee/);
+  assert.match(html, /skills-track/);
+  assert.match(html, /skill-pill/);
+  assert.match(html, /skill-logo/);
+  assert.match(html, /Google Workspace/);
+  assert.match(html, /CRM Management/);
+  assert.match(html, /Basic Troubleshooting/);
+  assert.match(html, /href="#certificates">Certificates/);
   assert.match(html, /Certificates/);
   assert.match(html, /HubSpot Content Hub Software Certified/);
   assert.match(html, /HubSpot Academy/);
@@ -58,7 +71,10 @@ test("homepage follows the single Stitch vertical timeline baseline", () => {
   assert.match(html, /assets\/img\/Certs\/download%20%281%29\.jpg/);
   assert.match(html, /data-certificate-dialog/);
   assert.match(html, /data-certificate-close/);
-  assert.match(html, /Let's build your pipeline\./);
+  assert.match(html, /Let's Drive Revenue\./);
+  assert.match(html, /Copy Email/);
+  assert.match(html, /data-copy-email="jonhryawesome@gmail\.com"/);
+  assert.doesNotMatch(html, /<section class="final-cta[\\s\\S]*button-arrow/);
   assert.match(html, /class="timeline-line"/);
   assert.match(html, /class="timeline-visual"/);
   assert.match(html, /data-timeline-reveal/);
@@ -66,8 +82,11 @@ test("homepage follows the single Stitch vertical timeline baseline", () => {
   assert.match(html, /assets\/img\/highlights\/a6e88e4e-4fe9-4ccf-be59-9f54d75703ee\.jpg/);
   assert.match(html, /assets\/img\/highlights\/b3e91310-ae95-4f5d-8a2e-31e9c8232bb5\.jpg/);
   assert.match(html, /assets\/img\/profile-960\.jpg/);
-  assert.match(html, /assets\/img\/profile\.png/);
   assert.match(html, /class="profile-id-tag"/);
+  assert.match(html, /footer-link-tree/);
+  assert.match(html, /footer-icon-link/);
+  assert.match(html, /2026 Jonh Ryan Coranes\. All rights reserved\./);
+  assert.doesNotMatch(html, /Built for clarity and recruiter-friendly presentation\./);
 });
 
 test("homepage preserves approved public-safe constraints", () => {
@@ -78,7 +97,8 @@ test("homepage preserves approved public-safe constraints", () => {
   assert.doesNotMatch(html, /Conversion Improvement|Team Quota Attainment|85%|92%|100%|Top Performer/i);
   assert.doesNotMatch(html, /references available|residential address|barangay|street/i);
   assert.doesNotMatch(html, /darkMode|theme toggle|tailwindcss/i);
-  assert.match(html, /mailto:/);
+  assert.match(html, /instagram\.com\/jonhryawesome/);
+  assert.match(html, /facebook\.com\/jonhrheyan\.coranes/);
   assert.match(html, /assets\/resume\/jonh-ryan-coranes-resume\.pdf/);
   assert.match(html, /application\/ld\+json/);
 });
@@ -100,7 +120,25 @@ test("styles encode the Executive Precision light design system", () => {
   assert.match(css, /--timeline-image-x/);
   assert.match(css, /data-timeline-reveal/);
   assert.match(css, /\.hero-social-button/);
+  assert.match(css, /\.hero-icon-button/);
+  assert.match(css, /\.email-copy-button\.is-copied/);
+  assert.match(css, /\.footer-link-tree/);
+  assert.match(css, /\.footer-icon-link/);
+  assert.match(css, /\.footer-rights/);
+  assert.match(css, /\.site-footer[\s\S]*linear-gradient\(135deg, #001227/);
+  assert.match(css, /rgba\(255, 255, 255, 0\.72\)/);
   assert.match(css, /\.capability-card/);
+  assert.doesNotMatch(css, /\.capability-card:hover/);
+  assert.doesNotMatch(css, /@keyframes capability-hover-lift/);
+  assert.match(css, /\.skill-groups/);
+  assert.match(css, /\.skill-group h3/);
+  assert.match(css, /\.skills-marquee/);
+  assert.match(css, /\.skills-track/);
+  assert.match(css, /\.skill-pill/);
+  assert.match(css, /\.skill-logo/);
+  assert.match(css, /@keyframes skills-marquee/);
+  assert.match(css, /animation:\s*skills-marquee/);
+  assert.match(css, /animation-play-state:\s*paused/);
   assert.match(css, /\.certificate-card/);
   assert.match(css, /grid-template-columns:\s*minmax\(320px, 460px\) minmax\(0, 1fr\)/);
   assert.match(css, /\.certificate-media/);
@@ -111,6 +149,9 @@ test("styles encode the Executive Precision light design system", () => {
   assert.doesNotMatch(css, /--cert-image/);
   assert.doesNotMatch(css, /\.certificate-image-card::before/);
   assert.match(css, /\.certificate-dialog/);
+  assert.match(css, /\.final-cta/);
+  assert.match(css, /linear-gradient\(135deg, #001227/);
+  assert.match(css, /\.final-cta \.button-secondary/);
   assert.match(css, /\.certificates-section/);
   assert.match(css, /\.capability-icon/);
   assert.match(css, /@keyframes capability-float-in/);
@@ -121,10 +162,19 @@ test("styles encode the Executive Precision light design system", () => {
   assert.match(css, /\.about-intro-panel/);
   assert.match(css, /about-intro-panel\.is-visible \.two-columns/);
   assert.match(css, /\.expertise-brand-grid/);
+  assert.match(css, /\.expertise-brand-grid\.is-visible article/);
+  assert.match(css, /@keyframes expertise-card-pop/);
+  assert.match(css, /animation:\s*expertise-card-pop 2s/);
+  assert.match(css, /translate3d\(-34px, 12px, 0\) scale\(0\.96\)/);
   assert.match(css, /@media \(max-width: 575\.98px\)/);
   assert.match(css, /prefers-reduced-motion: reduce/);
-  assert.match(css, /@keyframes meta-type/);
+  assert.match(css, /@keyframes meta-type-loop/);
+  assert.match(css, /meta-type-loop 5\.6s/);
+  assert.match(css, /infinite/);
   assert.match(css, /meta-caret/);
+  assert.match(css, /font-size:\s*0\.94rem/);
+  assert.match(css, /font-weight:\s*700/);
+  assert.match(css, /flex:\s*0 0 30px/);
   assert.doesNotMatch(css, /background-clip:\s*text/i);
   assert.doesNotMatch(css, /border-radius:\s*(4[0-9]|[5-9][0-9])px/i);
 });
@@ -137,6 +187,9 @@ test("javascript is progressive enhancement only", () => {
   assert.match(js, /aria-current/);
   assert.match(js, /showModal/);
   assert.match(js, /data-certificate-open/);
+  assert.match(js, /data-copy-email/);
+  assert.match(js, /navigator\.clipboard/);
+  assert.match(js, /Email Copied/);
   assert.match(js, /timelineObserver/);
   assert.match(js, /data-timeline-reveal/);
   assert.doesNotMatch(js, /fetch\(|XMLHttpRequest|localStorage|sessionStorage/);
