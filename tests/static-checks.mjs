@@ -80,11 +80,12 @@ test("homepage follows the single Stitch vertical timeline baseline", () => {
   assert.match(html, /linkedin\.com\/in\/jonh-ryan-coranes/);
   assert.doesNotMatch(html, /<section class="final-cta[\\s\\S]*button-arrow/);
   assert.match(html, /class="timeline-line"/);
-  assert.match(html, /class="timeline-visual"/);
+  assert.match(html, /timeline-visual/);
   assert.match(html, /data-timeline-reveal/);
-  assert.match(html, /assets\/img\/highlights\/b9c3c19c-5eb9-4399-803f-af5c9b2493a0\.jpg/);
-  assert.match(html, /assets\/img\/highlights\/4ab2c802-1ef7-4d66-bb03-0563a2a13c1e\.jpg/);
-  assert.match(html, /assets\/img\/highlights\/b3e91310-ae95-4f5d-8a2e-31e9c8232bb5\.jpg/);
+  assert.match(html, /assets\/img\/Company\/idl-logo-img\.png/);
+  assert.match(html, /assets\/img\/Company\/easy_contact_philippines_inc_logo\.jpg/);
+  assert.match(html, /assets\/img\/Company\/Movate_Logo\.jpg/);
+  assert.match(html, /timeline-visual--logo/);
   assert.match(html, /assets\/img\/profile-960\.jpg/);
   assert.match(html, /class="profile-id-tag"/);
   assert.match(html, /footer-link-tree/);

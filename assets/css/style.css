@@ -753,6 +753,24 @@ h1 span {
   transition: transform 650ms cubic-bezier(0.16, 1, 0.3, 1), filter 650ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.timeline-visual--logo {
+  background: #F8F9FB;
+  border: 1px solid #C4C6CE;
+}
+
+.timeline-visual--logo img {
+  object-fit: contain;
+  padding: 24px 40px;
+  transform: none;
+  transition: none;
+}
+
+.timeline-visual--logo:hover img,
+.timeline-visual--logo:focus-within img {
+  transform: none;
+  filter: none;
+}
+
 .timeline-visual:hover,
 .timeline-visual:focus-within {
   transform: translateY(-3px);
