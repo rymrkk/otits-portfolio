@@ -138,3 +138,14 @@ copyEmailButtons.forEach((button) => {
     }
   });
 });
+
+const resumeLink = document.querySelector('a[href*="resume"]');
+if (resumeLink) {
+  resumeLink.addEventListener("click", () => {
+    const span = resumeLink.querySelector("span");
+    if (!span) return;
+    const orig = span.textContent;
+    span.textContent = "Opening…";
+    window.setTimeout(() => { span.textContent = orig; }, 1400);
+  });
+}
