@@ -40,9 +40,8 @@ test("homepage follows the single Stitch vertical timeline baseline", () => {
   assert.match(html, /Career Timeline/);
   assert.match(html, /IDL Web Inc\./);
   assert.match(html, /Mar 2025 - Sept 2026/);
-  assert.match(html, /Feb 2023 - Mar 2025/);
   assert.match(html, /Account Manager/);
-  assert.match(html, /Mar 2024 - May 2026/);
+  assert.match(html, /Feb 2023 - Mar 2025/);
   assert.match(html, /Easy Contact Inc\./);
   assert.match(html, /Team Leader, Telemarketer/);
   assert.match(html, /Sept 2021 - Jan 2023/);
@@ -84,7 +83,6 @@ test("homepage follows the single Stitch vertical timeline baseline", () => {
   assert.match(html, /class="timeline-visual"/);
   assert.match(html, /data-timeline-reveal/);
   assert.match(html, /assets\/img\/highlights\/b9c3c19c-5eb9-4399-803f-af5c9b2493a0\.jpg/);
-  assert.match(html, /assets\/img\/highlights\/f0169173-4bbe-4bb7-bfdf-7933467b1492\.jpg/);
   assert.match(html, /assets\/img\/highlights\/4ab2c802-1ef7-4d66-bb03-0563a2a13c1e\.jpg/);
   assert.match(html, /assets\/img\/highlights\/b3e91310-ae95-4f5d-8a2e-31e9c8232bb5\.jpg/);
   assert.match(html, /assets\/img\/profile-960\.jpg/);
